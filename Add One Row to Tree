@@ -1,0 +1,39 @@
+//Add One Row to Tree
+
+class Solution {
+public:
+   
+    TreeNode* add(TreeNode* root, int val, int depth, int curr){
+        if(root == NULL){
+            return NULL;
+        }
+
+        if(curr == depth - 1){
+            TreeNode* l = root -> left;
+            TreeNode* r = root -> right;
+
+            root -> left = new TreeNode(val);
+            root -> right = new TreeNode(val);
+
+            root -> left -> left = l;
+            root -> right -> right = r;
+
+            return root;
+        }
+
+        root -> left = add(root -> left, val, depth, curr + 1);
+        root -> right = add(root -> right, val, depth, curr + 1);
+
+        return root;
+    }
+    TreeNode* addOneRow(TreeNode* root, int val, int depth) {
+        if(depth == 1){
+            TreeNode* root2 = new TreeNode(val);
+            root2 -> left = root;
+            return root2;
+        }
+
+        int curr = 1;
+        return add(root, val, depth, curr);
+    }
+};
