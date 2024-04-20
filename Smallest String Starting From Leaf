@@ -1,0 +1,26 @@
+//Smallest String Starting From Leaf
+
+class Solution {
+public:
+    string result = "";
+    void func(TreeNode* root, string curr){
+        if(!root){
+            return;
+        }
+        curr = char(root -> val + 'a') + curr;
+
+        if(root -> left == NULL && root -> right == NULL){
+            if(result == "" || result > curr){
+                result = curr;
+            }
+        }
+
+        func(root -> left, curr);
+        func(root -> right, curr);
+    }
+    
+    string smallestFromLeaf(TreeNode* root) {
+        func(root, "");
+        return result;
+    }
+};
