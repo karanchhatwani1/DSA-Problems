@@ -1,0 +1,28 @@
+//Nth Tribonacci Number
+
+class Solution {
+public:
+    int tribonacci(int n) {
+        long long first = 0;
+        long long second = 1;
+        long long third = 1;
+
+        if(n == 0){
+            return 0;
+        }
+        if(n == 1 || n == 2){
+            return 1;
+        }
+
+        long long result = 0;
+
+        for(int i = 3; i <= n; i++){
+            result = first + second + third;
+            first = second;
+            second = third;
+            third = result;            
+        }
+
+        return result;
+    }
+};
