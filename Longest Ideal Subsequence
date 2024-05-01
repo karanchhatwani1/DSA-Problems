@@ -1,0 +1,29 @@
+//Longest ideal subsequence
+
+class Solution {
+public:
+    int longestIdealString(string s, int k) {
+        int dp[26] = {0};
+        
+        for(int i = s.size() - 1; i >= 0; i--)
+        {
+            int cur = s[i] - 'a';
+            int count = 0;
+            // checking longest length in from cur - k to cur + k
+            for(int  j = cur - k; j <= cur + k ; j++)
+            {
+                if(j >= 0 && j < 26)
+                    count = max(count, dp[j]);
+            }
+            
+            dp[cur] = count + 1;
+        }
+        
+        int maxi = INT_MIN;
+        for(int  i = 0; i < 26; i++)
+            if(dp[i] > maxi)
+                maxi = dp[i];
+        
+        return maxi;
+    }
+};
